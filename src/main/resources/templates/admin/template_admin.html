@@ -1,0 +1,33 @@
+<!-- Navigation -->
+<div th:fragment="header">
+    <header class="d-flex align-items-center">
+        <nav class="home">
+            <h2><a class="title" th:href="@{/home}">Home</a></h2>
+            <form class="form-head" action="/buscar" method="GET">
+                <input type="text" name="q" placeholder="Buscar...">
+                <button type="submit">Buscar</button>
+            </form>
+        </nav>
+        <nav class="sub-nav-list">
+            <!-- Menú desplegable de Bootstrap -->
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ADMIN
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" th:href="@{/productos}">Productos</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+</div>
+
+
+
+<!-- Footer -->
+<div th:fragment="footer">
+    <footer>
+        <p>&copy; 2024 Tienda en línea. Todos los derechos reservados.</p>
+    </footer>
+</div>
+

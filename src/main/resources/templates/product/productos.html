@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+
+  <link th:href="@{css/adminStyle.css}" rel="stylesheet" type="text/css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- Navigation -->
+<div th:include="admin/template_admin.html::header" ></div>
+
+<div class="container-fluid">
+  <nav class="body-nav p-5">
+    <div class="row align-items-center">
+      <div class="col-4">
+        <a class="btn btn-primary" th:href="@{/productos/create}">Crear Producto</a>
+      </div>
+      <div class="col-8">
+        <h2 class="title-nav">Productos</h2>
+      </div>
+    </div>
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Compania</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Acción</th>
+              <th scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="producto:${productos}">
+              <td th:text="${producto.name}"></td>
+              <td th:text="${producto.stock}"></td>
+              <td th:text="${producto.company}"></td>
+              <td th:text="${producto.price}"></td>
+              <td th:text="${producto.description}"></td>
+              <td th:text="${producto.category}"></td>
+              <td><a  class="btn btn-warning" th:href="@{productos/edit/{id} (id=${producto.ID})}">Editar</a> </td>
+              <td><a  class="btn btn-danger" th:href="@{productos/delete/{id} (id=${producto.ID})}">Eliminar</a> </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </nav>
+</div>
+<!-- Navigation -->
+<div th:include="admin/template_admin.html::footer" ></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
