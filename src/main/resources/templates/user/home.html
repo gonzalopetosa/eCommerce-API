@@ -8,10 +8,29 @@
 </head>
 <body>
 <!-- Navigation -->
-<div th:include="admin/template_admin.html::header"></div>
+<div th:include="user/template_user.html::header"></div>
 
 
-<div th:include="admin/template_admin.html::footer"></div>
+
+<div class="nav-cont container-fluid m-0" >
+    <nav class="body-nav text-center align-items-center justify-content-center">
+        <h2 class="p-4">Productos destacados</h2>
+        <section class="productos-section row align-items-center justify-content-around" >
+            <div class="productos-list row align-items-start justify-content-around" style="height: 100vh">
+                <div th:each="producto : ${productos}" class="producto col-md">
+
+                    <img th:src="@{'/images/' + ${producto.image}}" alt="" />
+                    <h3 th:text="${producto.name}"></h3>
+                    <p th:text="'Precio: $' + ${producto.price}"></p>
+                    <button><a th:href="@{/productoDetalle/{id} (id=${producto.ID}) }">Ver producto</a></button>
+
+                </div>
+            </div>
+        </section>
+    </nav>
+</div>
+
+<div th:include="user/template_user.html::footer"></div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

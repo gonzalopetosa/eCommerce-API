@@ -102,15 +102,20 @@ button[type="submit"]:hover {
     height: 100vh;
     padding-top: 10px;
 }
-.container{
+.cont-form{
     border: 3px solid crimson;
     border-radius: 10px;
     padding-top: 10px;
 }
 
 
-/* */
+/*user_template */
+.nav-link{
+    color: white;
+}
 
+
+/* */
 footer {
     background-color: #f8f9fa;
     padding: 20px;
