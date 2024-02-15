@@ -1,0 +1,77 @@
+
+<!-- Navigation -->
+<div th:fragment="header">
+    <header class="d-flex align-items-center">
+                <nav class="home">
+                    <h2><a class="title" th:href="@{/home}">Home</a></h2>
+                    <form class="form-head" action="/buscar" method="GET">
+                        <input type="text" name="q" placeholder="Buscar...">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </nav>
+                <nav class="sub-nav-list navbar navbar-expand-lg">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" th:href="@{/getCart}">Carrito</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/usuario/login}">Login</a></li>
+                        </ul>
+                    </div>
+                </nav>
+        </nav>
+    </header>
+</div>
+
+
+<!-- Navigation -->
+<div th:fragment="header-user">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">Spring eCommerce</a>
+
+            <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/search}">
+                <input class="form-control mr-sm-2" type="search"
+                       placeholder="Buscar" aria-label="Search" name="nombre"
+                       autocomplete="off">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown"><a
+                            class="nav-link dropdown-toggle" href="#"
+                            id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> USER </a>
+
+                        <div class="dropdown-menu"
+                             aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a>
+                            <a class="dropdown-item" th:href="@{/getCart}">Carrito</a>
+                            <a class="dropdown-item" th:href="@{/usuario/cerrar}">Salir</a>
+                        </div></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+
+<!-- Footer -->
+<div th:fragment="footer">
+    <footer>
+        <p>&copy; 2024 Tienda en línea. Todos los derechos reservados.</p>
+    </footer>
+</div>
+
+
