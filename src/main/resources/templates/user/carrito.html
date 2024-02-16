@@ -44,7 +44,7 @@
                             <td th:text="${oI.product.company}"></td>
                             <td th:text="${oI.price}"></td>
                             <td th:text="${oI.quantity}"></td>
-                            <td><a class="btn btn-danger">Quitar</a></td>
+                            <td><a th:href="@{/delete/product/{id} (id=${oI.product.getID()}) }" class="btn btn-danger">Quitar</a></td>
                         </tr>
                         </tbody>
                     </table>

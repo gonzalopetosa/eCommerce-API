@@ -67,4 +67,28 @@ public class HomeController {
         model.addAttribute("order", o);
         return "user/carrito";
     }
+
+    @GetMapping("/delete/product/{id}")
+    public String deleteProductOrder(@PathVariable Integer id,Model model){
+
+        List<OrderItem> newOrderItems = new ArrayList<>();
+        double sumTotal = 0;
+        for (OrderItem oI :orderItems){
+            if(oI.getProduct().getID() != id){
+                newOrderItems.add(oI);
+            }
+        }
+        orderItems = newOrderItems;
+        o.setOrderItem(orderItems);
+        for (OrderItem oI :orderItems){
+            sumTotal += oI.getPrice();
+        }
+        o.setTotal(sumTotal);
+
+        model.addAttribute("orderItems", orderItems);
+        model.addAttribute("order", o);
+        return "user/carrito";
+    }
+
+
 }
