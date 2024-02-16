@@ -17,5 +17,6 @@ public interface OrderService {
     public Date findDateByID(Integer id) throws Exception;
     public Client findClientById(Integer orderId) throws Exception;
     public List<OrderItem> findItemsById(Integer id) throws Exception;
-    public boolean exist(Integer ID);
+    public boolean exist(Integer id);
+
 }

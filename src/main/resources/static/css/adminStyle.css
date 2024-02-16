@@ -86,7 +86,8 @@ button[type="submit"]:hover {
     display: flex;
     justify-content: center;
 }
-.table th,td{
+
+.table-header th,td{
     color: whitesmoke;
 }
 .body-nav{
@@ -114,6 +115,11 @@ button[type="submit"]:hover {
     color: white;
 }
 
+
+/* Carrito */
+.table th,td{
+    color: black;
+}
 
 /* */
 footer {

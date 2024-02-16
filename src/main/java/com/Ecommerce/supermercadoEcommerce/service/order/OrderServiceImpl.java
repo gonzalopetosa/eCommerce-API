@@ -3,7 +3,9 @@ package com.Ecommerce.supermercadoEcommerce.service.order;
 import com.Ecommerce.supermercadoEcommerce.entity.Client;
 import com.Ecommerce.supermercadoEcommerce.entity.Order;
 import com.Ecommerce.supermercadoEcommerce.entity.OrderItem;
+import com.Ecommerce.supermercadoEcommerce.entity.Product;
 import com.Ecommerce.supermercadoEcommerce.repository.OrderRepository;
+import com.Ecommerce.supermercadoEcommerce.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     private OrderRepository repository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public Order add(Order order) throws Exception {
@@ -130,4 +135,5 @@ public class OrderServiceImpl implements OrderService{
     public boolean exist(Integer ID) {
         return repository.existsById(ID);
     }
+
 }

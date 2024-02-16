@@ -32,18 +32,18 @@
                         <thead>
                         <tr>
                             <th scope="col">Producto</th>
+                            <th scope="col">Marca</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Cantidad</th>
-                            <th scope="col">Total</th>
                             <th scope="col">Acción</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td th:text="${producto.name}"></td>
-                            <td th:text="${producto.price}"></td>
                             <td th:text="${producto.company}"></td>
-                            <td ></td>
+                            <td th:text="${producto.price}"></td>
+                            <td th:text="${cantidad}"></td>
                             <td><a class="btn btn-danger">Quitar</a></td>
                         </tr>
                         </tbody>
