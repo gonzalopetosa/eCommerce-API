@@ -20,6 +20,10 @@ public class HomeController {
     @Autowired
     private ProductServiceImpl service;
 
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    private Order o = new Order();
+
     @GetMapping("")
     public String home(Model model) throws Exception {
         model.addAttribute("productos", service.findAll());
@@ -35,23 +39,32 @@ public class HomeController {
 
     @PostMapping("/order")
     public String addOrder(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) throws Exception {
-        List<Order> orders = new ArrayList<Order>();
-
+        OrderItem orderItem = new OrderItem();
         Product p = service.findById(id);
+        double sumTotal = 0;
 
-        Order o = new Order();
-        o.setTotal(p.getPrice()*cantidad);
+        orderItem.setOrder(o);
+        orderItem.setQuantity(cantidad);
+        orderItem.setPrice(p.getPrice()*cantidad);
+        orderItem.setProduct(p);
+        orderItem.setName(p.getName());
 
-        List<OrderItem> orderItems = new ArrayList<OrderItem>();
-        OrderItem oItem = OrderItem.builder().order(o).product(p).quantity(cantidad).build();
-        orderItems.add(oItem);
+        Integer idProducto= p.getID();
+        boolean ingresado = orderItems.stream().anyMatch(product -> product.getProduct().getID()==idProducto);
 
+        if (!ingresado) {
+            orderItems.add(orderItem);
+        }
+
+        for (OrderItem oI :orderItems){
+            sumTotal += oI.getPrice();
+        }
+
+        o.setTotal(sumTotal);
         o.setOrderItem(orderItems);
-        orders.add(o);
 
-        model.addAttribute("cantidad",cantidad);
-        model.addAttribute("producto",p);
-        model.addAttribute("orden",o);
+        model.addAttribute("orderItems", orderItems);
+        model.addAttribute("order", o);
         return "user/carrito";
     }
 }

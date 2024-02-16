@@ -81,15 +81,11 @@ button[type="submit"]:hover {
 /* productos */
 .container-fluid{
     height: 100vh;
-    background-color: rgba(10,30,30);
-    color: whitesmoke;
+    color: black;
     display: flex;
     justify-content: center;
 }
 
-.table-header th,td{
-    color: whitesmoke;
-}
 .body-nav{
     width: 80%;
 }

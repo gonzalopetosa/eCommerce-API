@@ -25,7 +25,7 @@
       <div class="table-container">
         <table class="table">
           <thead class="table-header">
-            <tr>
+            <tr class="col-th">
               <th scope="col">Nombre</th>
               <th scope="col">Stock</th>
               <th scope="col">Compania</th>
@@ -37,7 +37,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="producto:${productos}">
+            <tr class="col-td" th:each="producto:${productos}">
               <td th:text="${producto.name}"></td>
               <td th:text="${producto.stock}"></td>
               <td th:text="${producto.company}"></td>
