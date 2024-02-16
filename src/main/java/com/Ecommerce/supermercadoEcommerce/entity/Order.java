@@ -34,5 +34,5 @@ public class Order {
     //@JsonIgnore
     private List<OrderItem> orderItem;
 
-    private double total;
+    private double total = 0;
 }

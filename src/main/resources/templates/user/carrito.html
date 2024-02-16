@@ -35,6 +35,7 @@
                             <th scope="col">Marca</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
                             <th scope="col">Acción</th>
                         </tr>
                         </thead>
@@ -42,8 +43,9 @@
                         <tr th:each="oI:${orderItems}">
                             <td th:text="${oI.name}"></td>
                             <td th:text="${oI.product.company}"></td>
-                            <td th:text="${oI.price}"></td>
+                            <td th:text="${oI.product.price}"></td>
                             <td th:text="${oI.quantity}"></td>
+                            <td th:text="${oI.price}"></td>
                             <td><a th:href="@{/delete/product/{id} (id=${oI.product.getID()}) }" class="btn btn-danger">Quitar</a></td>
                         </tr>
                         </tbody>
@@ -54,7 +56,7 @@
                     <h2 class="card-title">SUBTOTAL</h2>
 
                     <ul class="list-group">
-                        <li class="list-group-item"><h5 th:text="${order.total}"></h5></li>
+                        <li class="list-group-item"><h5 th:text="${order.total} + ' usd'"></h5></li>
                         <a  th:href="@{/detalleOrden}" class="btn btn-dark">Ver Orden</a>
                     </ul>
                 </div>

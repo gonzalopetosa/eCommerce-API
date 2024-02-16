@@ -1,8 +1,10 @@
 package com.Ecommerce.supermercadoEcommerce.controller;
 
+import com.Ecommerce.supermercadoEcommerce.entity.Client;
 import com.Ecommerce.supermercadoEcommerce.entity.Order;
 import com.Ecommerce.supermercadoEcommerce.entity.OrderItem;
 import com.Ecommerce.supermercadoEcommerce.entity.Product;
+import com.Ecommerce.supermercadoEcommerce.service.client.ClientServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.product.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,10 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private ProductServiceImpl service;
+    private ProductServiceImpl productService;
+
+    @Autowired
+    private ClientServiceImpl clientService;
 
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -25,13 +30,13 @@ public class HomeController {
 
     @GetMapping("")
     public String home(Model model) throws Exception {
-        model.addAttribute("productos", service.findAll());
+        model.addAttribute("productos", productService.findAll());
         return "user/home";
     }
 
     @GetMapping("productoDetalle/{id}")
     public String home(@PathVariable Integer id,Model model) throws Exception {
-        Product p = service.findById(id);
+        Product p = productService.findById(id);
         model.addAttribute("producto",p);
         return "user/productHome";
     }
@@ -39,7 +44,7 @@ public class HomeController {
     @PostMapping("/order")
     public String addOrder(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) throws Exception {
         OrderItem orderItem = new OrderItem();
-        Product p = service.findById(id);
+        Product p = productService.findById(id);
         double sumTotal = 0;
 
         orderItem.setOrder(o);
@@ -98,7 +103,13 @@ public class HomeController {
     }
 
     @GetMapping("/detalleOrden")
-    public String viewOrderDetails(){
+    public String viewOrderDetails(Model model) throws Exception {
+
+        Client c = clientService.findById(2);
+
+        model.addAttribute("orderItems", orderItems);
+        model.addAttribute("order", o);
+        model.addAttribute("client", c);
         return "user/resumenOrden";
     }
 
