@@ -3,7 +3,6 @@ package com.Ecommerce.supermercadoEcommerce.controller;
 import com.Ecommerce.supermercadoEcommerce.entity.Order;
 import com.Ecommerce.supermercadoEcommerce.entity.OrderItem;
 import com.Ecommerce.supermercadoEcommerce.entity.Product;
-import com.Ecommerce.supermercadoEcommerce.service.order.OrderServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.product.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,6 +95,11 @@ public class HomeController {
         model.addAttribute("order", o);
 
         return "user/carrito";
+    }
+
+    @GetMapping("/detalleOrden")
+    public String viewOrderDetails(){
+        return "user/resumenOrden";
     }
 
 }
