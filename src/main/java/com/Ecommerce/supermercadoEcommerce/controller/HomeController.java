@@ -8,6 +8,8 @@ import com.Ecommerce.supermercadoEcommerce.service.client.ClientServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.order.OrderServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.orderItem.OrderItemServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.product.ProductServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -37,6 +40,8 @@ public class HomeController {
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private Order o = new Order();
+
+    private final Logger LOGGER = LoggerFactory.getLogger(ProductosController.class);
 
     @GetMapping("")
     public String home(Model model) throws Exception {
@@ -142,6 +147,14 @@ public class HomeController {
         o = new Order();
         orderItems.clear();
         return "redirect:/";
+    }
+
+    @PostMapping("/search")
+    public String search(@RequestParam String nombre, Model model) throws Exception {
+        LOGGER.info("Producto buscado: {}",nombre);
+        List<Product> products = productService.findAll().stream().filter(p -> p.getName().contains(nombre)).collect(Collectors.toList());
+        model.addAttribute("productos",products);
+        return "user/home";
     }
 
 }

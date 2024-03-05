@@ -4,8 +4,8 @@
     <header class="d-flex align-items-center">
                 <nav class="home">
                     <h2><a class="title" th:href="@{/}">Home</a></h2>
-                    <form class="form-head" action="/buscar" method="GET">
-                        <input type="text" name="q" placeholder="Buscar...">
+                    <form class="form-head" th:action="@{/search}" method="post">
+                        <input type="text" name="nombre" placeholder="Buscar...">
                         <button type="submit">Buscar</button>
                     </form>
                 </nav>
