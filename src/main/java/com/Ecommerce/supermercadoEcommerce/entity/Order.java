@@ -23,6 +23,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
 
+    private String number;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 

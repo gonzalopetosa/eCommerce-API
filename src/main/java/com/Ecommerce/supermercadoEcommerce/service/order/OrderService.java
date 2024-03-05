@@ -18,5 +18,5 @@ public interface OrderService {
     public Client findClientById(Integer orderId) throws Exception;
     public List<OrderItem> findItemsById(Integer id) throws Exception;
     public boolean exist(Integer id);
-
+    public String generarNumeroOrden() throws Exception;
 }

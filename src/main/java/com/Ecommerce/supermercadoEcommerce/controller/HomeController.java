@@ -5,6 +5,8 @@ import com.Ecommerce.supermercadoEcommerce.entity.Order;
 import com.Ecommerce.supermercadoEcommerce.entity.OrderItem;
 import com.Ecommerce.supermercadoEcommerce.entity.Product;
 import com.Ecommerce.supermercadoEcommerce.service.client.ClientServiceImpl;
+import com.Ecommerce.supermercadoEcommerce.service.order.OrderServiceImpl;
+import com.Ecommerce.supermercadoEcommerce.service.orderItem.OrderItemServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.product.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+
 
 @Controller
 @RequestMapping("/")
@@ -23,6 +27,12 @@ public class HomeController {
 
     @Autowired
     private ClientServiceImpl clientService;
+
+    @Autowired
+    private OrderServiceImpl orderService;
+
+    @Autowired
+    OrderItemServiceImpl orderItemService;
 
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -47,7 +57,6 @@ public class HomeController {
         Product p = productService.findById(id);
         double sumTotal = 0;
 
-        orderItem.setOrder(o);
         orderItem.setQuantity(cantidad);
         orderItem.setPrice(p.getPrice()*cantidad);
         orderItem.setProduct(p);
@@ -111,6 +120,28 @@ public class HomeController {
         model.addAttribute("order", o);
         model.addAttribute("client", c);
         return "user/resumenOrden";
+    }
+
+    @GetMapping("/saveOrder")
+    public String saveOrder() throws Exception {
+        Date crationDate = new Date();
+        o.setDate(crationDate);
+        o.setNumber(orderService.generarNumeroOrden());
+
+        Client c = clientService.findById(2);
+        o.setClient(c);
+
+        orderService.add(o);
+
+        for (OrderItem ot : orderItems){
+            ot.setOrder(o);
+            orderItemService.save(ot);
+
+        }
+
+        o = new Order();
+        orderItems.clear();
+        return "redirect:/";
     }
 
 }

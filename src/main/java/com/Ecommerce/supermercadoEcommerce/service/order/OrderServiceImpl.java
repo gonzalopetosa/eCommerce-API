@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -136,4 +137,33 @@ public class OrderServiceImpl implements OrderService{
         return repository.existsById(ID);
     }
 
+    public String generarNumeroOrden() throws Exception {
+        int numero=0;
+        String numeroConcatenado="";
+
+        List<Order> ordenes = findAll();
+
+        List<Integer> numeros= new ArrayList<Integer>();
+
+        ordenes.stream().forEach(o -> numeros.add( Integer.parseInt( o.getNumber())));
+
+        if (ordenes.isEmpty()) {
+            numero=1;
+        }else {
+            numero= numeros.stream().max(Integer::compare).get();
+            numero++;
+        }
+
+        if (numero<10) { //0000001000
+            numeroConcatenado="000000000"+String.valueOf(numero);
+        }else if(numero<100) {
+            numeroConcatenado="00000000"+String.valueOf(numero);
+        }else if(numero<1000) {
+            numeroConcatenado="0000000"+String.valueOf(numero);
+        }else if(numero<10000) {
+            numeroConcatenado="0000000"+String.valueOf(numero);
+        }
+
+        return numeroConcatenado;
+    }
 }
