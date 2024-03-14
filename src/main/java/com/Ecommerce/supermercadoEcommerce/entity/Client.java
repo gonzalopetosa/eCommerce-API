@@ -27,6 +27,7 @@ public class Client {
     private String postal_code;
     private String country;
     private String password;
+    private String tipo;
 
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)

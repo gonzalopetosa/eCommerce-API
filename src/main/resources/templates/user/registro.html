@@ -42,15 +42,15 @@
             </div>
         </div>
     </div>
-    <form th:action="@{/usuario/save}" method="post">
+    <form th:action="@{/user/save}" method="post">
         <div class="form-group">
-            <label for=>Nombre:</label> <input type="text"
-                                                         class="form-control" id="nombre" name="nombre" required
+            <label for="name">Nombre:</label> <input type="text"
+                                                         class="form-control" id="name" name="name" required
                                                          placeholder="Ingrese su nombres" autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label for=>Apellido:</label> <input type="text"
+            <label for="last_name">Apellido:</label> <input type="text"
                                                 class="form-control" id="last_name" name="last_name" required
                                                 placeholder="Ingrese su apellido" autocomplete="off">
 
@@ -63,8 +63,8 @@
         </div>
 
         <div class="form-group">
-            <label for="direccion">Dirección:</label> <input type="text"
-                                                             class="form-control" id="direccion" name="direccion" required
+            <label for="address">Dirección:</label> <input type="text"
+                                                             class="form-control" id="address" name="address" required
                                                              placeholder="Ingrese su dirección" autocomplete="off">
         </div>
 
