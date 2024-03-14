@@ -103,8 +103,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean existEmail(String email) {
-        return repository.findByEmail(email) != null;
+    public Client findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
 }

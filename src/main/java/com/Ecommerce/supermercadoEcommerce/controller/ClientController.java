@@ -20,9 +20,6 @@ public class ClientController {
     @PostMapping("/client")
     public ResponseEntity<?> save(@RequestBody Client c){
         try {
-            if(service.existEmail(c.getEmail())){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\\\"error\\\":\\\"El email ya le pertenece a un cliente\\\"}");
-            }
             if(c.getID()==null)
                 return ResponseEntity.created(new URI("/inventario/"+c.getID())).body(service.add(c));
             else

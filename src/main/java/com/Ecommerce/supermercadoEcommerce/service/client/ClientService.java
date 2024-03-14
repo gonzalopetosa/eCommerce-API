@@ -15,5 +15,5 @@ public interface ClientService {
     public void deleteById(Integer Id) throws Exception;
     public List<Order> findOrderHistoryById(Integer id) throws Exception;
     public boolean exist(Integer ID);
-    public boolean existEmail(String email);
+    public Client findByEmail(String email);
 }
