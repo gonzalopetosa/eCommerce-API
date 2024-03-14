@@ -26,6 +26,8 @@ public class Client {
     private String city;
     private String postal_code;
     private String country;
+    private String password;
+
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     @JsonIgnore
