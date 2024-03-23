@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -41,7 +42,7 @@ public class HomeController {
 
     private Order o = new Order();
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ProductosController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     @GetMapping("")
     public String home(Model model) throws Exception {
@@ -52,6 +53,7 @@ public class HomeController {
     @GetMapping("productoDetalle/{id}")
     public String home(@PathVariable Integer id,Model model) throws Exception {
         Product p = productService.findById(id);
+        LOGGER.info("Se desea delles del producto: {}",p);
         model.addAttribute("producto",p);
         return "user/productHome";
     }
@@ -67,11 +69,16 @@ public class HomeController {
         orderItem.setProduct(p);
         orderItem.setName(p.getName());
 
+
+
         Integer idProducto= p.getID();
-        boolean ingresado = orderItems.stream().anyMatch(product -> product.getProduct().getID()==idProducto);
+        boolean ingresado = orderItems.stream().anyMatch(product -> Objects.equals(product.getProduct().getID(), idProducto));
 
         if (!ingresado) {
+            LOGGER.info("Se agrego a la orden el siguiente item: {}",orderItem);
             orderItems.add(orderItem);
+        }else{
+            LOGGER.info("El item ya esta en la orden: {}",orderItem);
         }
 
         for (OrderItem oI :orderItems){
@@ -92,7 +99,7 @@ public class HomeController {
         List<OrderItem> newOrderItems = new ArrayList<>();
         double sumTotal = 0;
         for (OrderItem oI :orderItems){
-            if(oI.getProduct().getID() != id){
+            if(!Objects.equals(oI.getProduct().getID(), id)){
                 newOrderItems.add(oI);
             }
         }
@@ -137,6 +144,8 @@ public class HomeController {
         o.setClient(c);
 
         orderService.add(o);
+
+        LOGGER.info("Se guardo la orden: {}", o);
 
         for (OrderItem ot : orderItems){
             ot.setOrder(o);
