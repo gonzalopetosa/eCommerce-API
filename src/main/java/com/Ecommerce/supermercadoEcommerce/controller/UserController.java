@@ -29,7 +29,7 @@ public class UserController {
     @PostMapping("/save")
     public String save(Client client) throws Exception {
         LOGGER.info("Usuario a registrar {}", client);
-        client.setTipo("ADMIN");
+        client.setTipo("USER");
         clientService.add(client);
         return "redirect:/";
     }
