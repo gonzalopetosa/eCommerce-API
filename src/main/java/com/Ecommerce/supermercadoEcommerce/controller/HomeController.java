@@ -8,6 +8,7 @@ import com.Ecommerce.supermercadoEcommerce.service.client.ClientServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.order.OrderServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.orderItem.OrderItemServiceImpl;
 import com.Ecommerce.supermercadoEcommerce.service.product.ProductServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,9 +125,9 @@ public class HomeController {
     }
 
     @GetMapping("/detalleOrden")
-    public String viewOrderDetails(Model model) throws Exception {
+    public String viewOrderDetails(Model model, HttpSession session) throws Exception {
 
-        Client c = clientService.findById(2);
+        Client c = clientService.findById(Integer.parseInt(session.getAttribute("id_cliente").toString()));
 
         model.addAttribute("orderItems", orderItems);
         model.addAttribute("order", o);
@@ -135,12 +136,12 @@ public class HomeController {
     }
 
     @GetMapping("/saveOrder")
-    public String saveOrder() throws Exception {
+    public String saveOrder(HttpSession session) throws Exception {
         Date crationDate = new Date();
         o.setDate(crationDate);
         o.setNumber(orderService.generarNumeroOrden());
 
-        Client c = clientService.findById(2);
+        Client c = clientService.findById(Integer.parseInt(session.getAttribute("id_cliente").toString()));
         o.setClient(c);
 
         orderService.add(o);
